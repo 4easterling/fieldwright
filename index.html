@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Field Wright — Software for the field</title>
+  <meta name="description" content="Field Wright builds practical software for field-services teams — telecom, utilities, property, and oilfield. Independent apps by Hunter Easterling." />
+  <meta property="og:title" content="Field Wright — Software for the field" />
+  <meta property="og:description" content="Practical software for field-services teams: telecom, utilities, property, and oilfield." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --bg: #0B100D;
+      --bg-2: #0E1512;
+      --card: #131C16;
+      --border: #253129;
+      --border-hi: #33473A;
+      --text: #EAF2EC;
+      --text-2: #9DACA2;
+      --muted: #6E7D74;
+      --accent: #1FB56E;
+      --accent-2: #2CD483;
+      --on-accent: #06140D;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,16,13,0.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .bar { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .wordmark { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.02em; }
+    .mark {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: var(--on-accent); font-weight: 800; font-size: 15px;
+      display: grid; place-items: center;
+    }
+    .nav a { color: var(--text-2); text-decoration: none; font-size: 14px; margin-left: 26px; transition: color .15s; }
+    .nav a:hover { color: var(--text); }
+    @media (max-width: 620px) { .nav a { margin-left: 16px; font-size: 13px; } .nav a.hide-sm { display: none; } }
+
+    /* Hero */
+    .hero { position: relative; padding: 92px 0 72px; }
+    .hero::before {
+      content: ""; position: absolute; inset: -200px 0 auto 0; height: 500px; z-index: -1;
+      background: radial-gradient(600px 300px at 25% 0%, rgba(31,181,110,0.16), transparent 70%);
+    }
+    .kicker { color: var(--accent-2); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+    h1 {
+      font-size: clamp(30px, 5.4vw, 52px); line-height: 1.08; letter-spacing: -0.02em;
+      font-weight: 700; margin: 18px 0 0; max-width: 16ch;
+    }
+    .hero p { color: var(--text-2); font-size: clamp(15px, 2.2vw, 18px); margin-top: 22px; max-width: 60ch; }
+    .cta-row { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 11px;
+      font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .06s, filter .15s, border-color .15s;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--on-accent); }
+    .btn-primary:hover { filter: brightness(1.06); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-ghost { border: 1px solid var(--border-hi); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); }
+
+    /* Sections */
+    section { padding: 30px 0; }
+    .label { color: var(--muted); font-size: 12.5px; letter-spacing: 0.12em; margin-bottom: 22px; }
+    .label b { color: var(--accent-2); font-weight: 400; }
+    h2 { font-size: clamp(22px, 3.4vw, 30px); letter-spacing: -0.015em; margin-bottom: 6px; }
+
+    /* Approach */
+    .approach { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pt { border: 1px solid var(--border); border-radius: 14px; padding: 22px; background: var(--bg-2); }
+    .pt .n { color: var(--accent-2); font-size: 13px; }
+    .pt h3 { font-size: 16px; margin: 10px 0 6px; }
+    .pt p { color: var(--text-2); font-size: 14px; line-height: 1.55; }
+    @media (max-width: 760px) { .approach { grid-template-columns: 1fr; } }
+
+    /* Work */
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid var(--border); border-radius: 16px; padding: 26px; background: var(--card);
+      transition: border-color .18s, transform .18s, background .18s;
+    }
+    .card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+    .cat { color: var(--accent-2); font-size: 11.5px; letter-spacing: 0.13em; text-transform: uppercase; }
+    .card h3 { font-size: 19px; margin: 12px 0 8px; letter-spacing: -0.01em; }
+    .card p { color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+
+    /* About */
+    .about p { color: var(--text-2); font-size: 16px; max-width: 66ch; }
+    .about p + p { margin-top: 16px; }
+    .about strong { color: var(--text); font-weight: 600; }
+
+    /* Contact */
+    .contact { text-align: center; padding: 64px 0 30px; }
+    .contact h2 { margin-bottom: 12px; }
+    .contact p { color: var(--text-2); max-width: 48ch; margin: 0 auto 26px; }
+    .contact .email { color: var(--accent-2); text-decoration: none; }
+    .contact .email:hover { text-decoration: underline; }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 0 40px; }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
+    .foot a { color: var(--muted); text-decoration: none; }
+    .foot a:hover { color: var(--text-2); }
+
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <div class="wordmark">
+        <span class="mark">F</span>
+        <span>FIELD&nbsp;WRIGHT</span>
+      </div>
+      <nav class="nav">
+        <a href="#work" class="hide-sm">Work</a>
+        <a href="#about" class="hide-sm">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <div class="hero">
+      <div class="wrap">
+        <div class="kicker mono">Field-services software</div>
+        <h1>Practical software for teams that work in the field.</h1>
+        <p>
+          Hi, I'm Hunter Easterling. Field Wright is my studio for apps built around
+          real jobsite workflows — across telecom, utilities, property, and oilfield.
+          Tools that hold up in the truck, the yard, and the field, not just the demo.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#work">See the work</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approach -->
+    <section class="wrap">
+      <div class="label mono">// <b>APPROACH</b></div>
+      <div class="approach">
+        <div class="pt">
+          <div class="n mono">01</div>
+          <h3>Built from real fieldwork</h3>
+          <p>Every app starts from an actual workflow — the forms, the steps, the edge cases crews hit on the job.</p>
+        </div>
+        <div class="pt">
+          <div class="n mono">02</div>
+          <h3>Works where you work</h3>
+          <p>Designed for phones and tablets in the field: fast, legible, and forgiving of spotty connections.</p>
+        </div>
+        <div class="pt">
+          <div class="n mono">03</div>
+          <h3>No bloat</h3>
+          <p>Focused tools that do their job and get out of the way. Less clutter, fewer taps, no busywork.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="wrap" id="work">
+      <div class="label mono">// <b>SELECTED WORK</b></div>
+      <div class="grid">
+        <div class="card">
+          <div class="cat mono">Telecom · Fiber</div>
+          <h3>Fiber Splicer Planner</h3>
+          <p>Plan and track fiber splices — enclosures, trays, buffer and ribbon assignments, and splice diagrams for OSP crews.</p>
+        </div>
+        <div class="card">
+          <div class="cat mono">Real estate</div>
+          <h3>Property Management</h3>
+          <p>Rentals, units, tenants, leases, and maintenance requests organized in one place.</p>
+        </div>
+        <div class="card">
+          <div class="cat mono">Telecom · Inventory</div>
+          <h3>Telecom Construction Material Inventory</h3>
+          <p>Track cable, hardware, and materials across telecom construction jobs and yards.</p>
+        </div>
+        <div class="card">
+          <div class="cat mono">Utility · Maps</div>
+          <h3>Re Route</h3>
+          <p>Opens Apple Maps links in Google Maps automatically — no copy and paste.</p>
+        </div>
+        <div class="card">
+          <div class="cat mono">Oilfield</div>
+          <h3>Rig Check</h3>
+          <p>Digital equipment inspections and safety checklists for drilling rigs.</p>
+        </div>
+        <div class="card">
+          <div class="cat mono">In progress</div>
+          <h3>More on the way</h3>
+          <p>New field-services tools in active development. Have a workflow that needs one? Let's talk.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="wrap about" id="about">
+      <div class="label mono">// <b>ABOUT</b></div>
+      <h2>One developer, close to the work.</h2>
+      <p style="margin-top:16px;">
+        <strong>Field Wright</strong> is the studio name for the software I build as an independent
+        developer. My focus is field-services industries — telecom, utilities, property, and oilfield —
+        where the right tool saves a crew real time and the wrong one gets left on the home screen.
+      </p>
+      <p>
+        Because I build and ship these myself, the apps stay focused and the feedback loop stays short.
+        If you run field operations and there's a workflow that still lives in spreadsheets and text
+        messages, that's usually where a small, well-made app pays for itself fast.
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact wrap" id="contact">
+      <div class="divider"></div>
+      <div style="height:34px;"></div>
+      <h2>Let's build the right tool.</h2>
+      <p>Questions about an app, or a field workflow you'd like turned into software? Reach out.</p>
+      <a class="btn btn-primary" href="mailto:contact@fieldwright.dev">contact@fieldwright.dev</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© 2026 Field Wright</span>
+      <span>Built by Hunter Easterling · <a href="mailto:contact@fieldwright.dev">contact@fieldwright.dev</a></span>
+    </div>
+  </footer>
+</body>
+</html>
