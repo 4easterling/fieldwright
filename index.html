@@ -8,150 +8,248 @@
   <meta property="og:title" content="Field Wright — Apps I built to solve real problems" />
   <meta property="og:description" content="I build small apps to fix problems I run into, and share them in case they help you too." />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0A0E0C" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
+    /* ---- Tokens: deliberately green-biased neutrals, green accent (brand thread) ---- */
     :root {
-      --bg: #0B100D;
-      --bg-2: #0E1512;
-      --card: #131C16;
-      --border: #253129;
-      --border-hi: #33473A;
-      --text: #EAF2EC;
-      --text-2: #9DACA2;
-      --muted: #6E7D74;
-      --accent: #1FB56E;
-      --accent-2: #2CD483;
-      --on-accent: #06140D;
+      --bg:            #0A0E0C;
+      --surface:       #0E1411;
+      --card:          #131A16;
+      --card-hover:    #161E19;
+      --border:        #232C27;
+      --border-strong: #34413A;
+      --text:          #EAF1EC;
+      --text-2:        #A3AFA8;   /* AA on --bg */
+      --muted:         #6E7C74;
+      --accent:        #24C56D;
+      --accent-2:      #3ADB84;
+      --accent-soft:   rgba(36,197,109,0.12);
+      --on-accent:     #04130A;
+      --ring:          #3ADB84;
+      --shadow:        0 1px 0 rgba(255,255,255,0.02), 0 18px 48px -24px rgba(0,0,0,0.7);
+
+      --f-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --s1: 8px;  --s2: 12px; --s3: 16px; --s4: 24px;
+      --s5: 40px; --s6: 64px; --s7: 96px; --s8: 128px;
+      --maxw: 1080px;
     }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:            #FBFDFB;
+        --surface:       #FFFFFF;
+        --card:          #FFFFFF;
+        --card-hover:    #FFFFFF;
+        --border:        #E4EBE6;
+        --border-strong: #CBD6CE;
+        --text:          #101A15;
+        --text-2:        #55625B;   /* AA on --bg */
+        --muted:         #7E8C84;
+        --accent:        #12864F;
+        --accent-2:      #16A362;
+        --accent-soft:   rgba(18,134,79,0.10);
+        --on-accent:     #FFFFFF;
+        --ring:          #12864F;
+        --shadow:        0 1px 2px rgba(16,26,21,0.04), 0 22px 48px -30px rgba(16,26,21,0.30);
+      }
+    }
+    /* Explicit toggle wins over the media query in both directions */
+    :root[data-theme="dark"] {
+      --bg:#0A0E0C; --surface:#0E1411; --card:#131A16; --card-hover:#161E19;
+      --border:#232C27; --border-strong:#34413A; --text:#EAF1EC; --text-2:#A3AFA8;
+      --muted:#6E7C74; --accent:#24C56D; --accent-2:#3ADB84; --accent-soft:rgba(36,197,109,0.12);
+      --on-accent:#04130A; --ring:#3ADB84;
+      --shadow:0 1px 0 rgba(255,255,255,0.02), 0 18px 48px -24px rgba(0,0,0,0.7);
+    }
+    :root[data-theme="light"] {
+      --bg:#FBFDFB; --surface:#FFFFFF; --card:#FFFFFF; --card-hover:#FFFFFF;
+      --border:#E4EBE6; --border-strong:#CBD6CE; --text:#101A15; --text-2:#55625B;
+      --muted:#7E8C84; --accent:#12864F; --accent-2:#16A362; --accent-soft:rgba(18,134,79,0.10);
+      --on-accent:#FFFFFF; --ring:#12864F;
+      --shadow:0 1px 2px rgba(16,26,21,0.04), 0 22px 48px -30px rgba(16,26,21,0.30);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--f-sans);
+      font-size: 17px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       overflow-x: hidden;
     }
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    }
-    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: var(--f-mono); }
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding-inline: var(--s4); }
+    a { color: inherit; }
+    ::selection { background: var(--accent-soft); }
+    :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
 
-    /* Header */
+    /* ---- Header ---- */
     header {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(11,16,13,0.72);
-      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: saturate(140%) blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .bar { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-    .wordmark { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.02em; }
+    .bar { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: var(--s3); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
     .mark {
-      width: 26px; height: 26px; border-radius: 7px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: var(--on-accent); font-weight: 800; font-size: 15px;
-      display: grid; place-items: center;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(140deg, var(--accent), var(--accent-2));
+      color: var(--on-accent); font-family: var(--f-mono); font-weight: 700; font-size: 16px;
+      display: grid; place-items: center; letter-spacing: -1px;
     }
-    .nav a { color: var(--text-2); text-decoration: none; font-size: 14px; margin-left: 26px; transition: color .15s; }
-    .nav a:hover { color: var(--text); }
-    @media (max-width: 620px) { .nav a { margin-left: 16px; font-size: 13px; } .nav a.hide-sm { display: none; } }
+    .brand b { font-weight: 600; font-size: 15px; letter-spacing: 0.06em; }
+    .nav { display: flex; align-items: center; gap: var(--s4); }
+    .nav a.link { font-size: 14px; color: var(--text-2); text-decoration: none; transition: color .16s; }
+    .nav a.link:hover { color: var(--text); }
+    @media (max-width: 640px) { .nav a.link { display: none; } .nav { gap: var(--s2); } }
 
-    /* Hero */
-    .hero { position: relative; padding: 92px 0 72px; }
-    .hero::before {
-      content: ""; position: absolute; inset: -200px 0 auto 0; height: 500px; z-index: -1;
-      background: radial-gradient(600px 300px at 25% 0%, rgba(31,181,110,0.16), transparent 70%);
+    .icon-btn {
+      display: inline-grid; place-items: center; width: 38px; height: 38px;
+      border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
+      color: var(--text-2); cursor: pointer; transition: color .16s, border-color .16s, background .16s;
     }
-    .kicker { color: var(--accent-2); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
-    h1 {
-      font-size: clamp(30px, 5.4vw, 52px); line-height: 1.08; letter-spacing: -0.02em;
-      font-weight: 700; margin: 18px 0 0; max-width: 16ch;
+    .icon-btn:hover { color: var(--text); border-color: var(--border-strong); }
+    .icon-btn svg { width: 18px; height: 18px; }
+    .theme-sun { display: none; }
+    :root[data-theme="light"] .theme-sun { display: block; }
+    :root[data-theme="light"] .theme-moon { display: none; }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) .theme-sun { display: block; }
+      :root:not([data-theme="dark"]) .theme-moon { display: none; }
     }
-    .hero p { color: var(--text-2); font-size: clamp(15px, 2.2vw, 18px); margin-top: 22px; max-width: 60ch; }
-    .cta-row { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+
     .btn {
-      display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 11px;
-      font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .06s, filter .15s, border-color .15s;
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      padding: 12px 18px; border-radius: 11px; font-size: 14.5px; font-weight: 600;
+      text-decoration: none; border: 1px solid transparent;
+      transition: transform .06s ease, filter .16s ease, border-color .16s, background .16s, color .16s;
     }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--on-accent); }
-    .btn-primary:hover { filter: brightness(1.06); }
+    .btn-primary { background: linear-gradient(140deg, var(--accent), var(--accent-2)); color: var(--on-accent); }
+    .btn-primary:hover { filter: brightness(1.05); }
     .btn-primary:active { transform: translateY(1px); }
-    .btn-ghost { border: 1px solid var(--border-hi); color: var(--text); }
-    .btn-ghost:hover { border-color: var(--accent); }
+    .btn-ghost { border-color: var(--border-strong); color: var(--text); background: transparent; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent-2); }
 
-    /* Sections */
-    section { padding: 30px 0; }
-    .label { color: var(--muted); font-size: 12.5px; letter-spacing: 0.12em; margin-bottom: 22px; }
-    .label b { color: var(--accent-2); font-weight: 400; }
-    h2 { font-size: clamp(22px, 3.4vw, 30px); letter-spacing: -0.015em; margin-bottom: 6px; }
+    /* ---- Reveal-on-scroll (respects reduced motion) ---- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
 
-    /* Approach */
-    .approach { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .pt { border: 1px solid var(--border); border-radius: 14px; padding: 22px; background: var(--bg-2); }
-    .pt .n { color: var(--accent-2); font-size: 13px; }
-    .pt h3 { font-size: 16px; margin: 10px 0 6px; }
-    .pt p { color: var(--text-2); font-size: 14px; line-height: 1.55; }
+    /* ---- Eyebrow / section label ---- */
+    .eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2); }
+    .label { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em; color: var(--muted); display: flex; align-items: center; gap: 10px; margin-bottom: var(--s4); }
+    .label::after { content: ""; height: 1px; flex: 1; background: var(--border); }
+
+    section { padding-block: var(--s6); }
+    h1, h2, h3 { text-wrap: balance; }
+
+    /* ---- Hero ---- */
+    .hero { position: relative; padding-top: var(--s7); padding-bottom: var(--s6); }
+    .hero::before {
+      content: ""; position: absolute; inset: -160px 0 auto -10%; height: 520px; z-index: -1; pointer-events: none;
+      background: radial-gradient(560px 280px at 22% 8%, var(--accent-soft), transparent 72%);
+    }
+    .hero h1 {
+      font-size: clamp(33px, 6vw, 58px); line-height: 1.05; letter-spacing: -0.025em;
+      font-weight: 600; margin-top: var(--s3); max-width: 17ch;
+    }
+    .hero .lede { color: var(--text-2); font-size: clamp(16px, 2.2vw, 19px); margin-top: var(--s4); max-width: 60ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s5); }
+
+    /* ---- Approach ---- */
+    .approach { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+    .pt { border: 1px solid var(--border); border-radius: 14px; padding: var(--s4); background: var(--surface); }
+    .pt .n { font-family: var(--f-mono); font-size: 12.5px; color: var(--accent-2); }
+    .pt h3 { font-size: 16.5px; font-weight: 600; margin: 12px 0 6px; letter-spacing: -0.01em; }
+    .pt p { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
     @media (max-width: 760px) { .approach { grid-template-columns: 1fr; } }
 
-    /* Work */
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    /* ---- Apps grid ---- */
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
     @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
     .card {
-      border: 1px solid var(--border); border-radius: 16px; padding: 26px; background: var(--card);
-      transition: border-color .18s, transform .18s, background .18s;
+      position: relative; border: 1px solid var(--border); border-radius: 16px;
+      padding: var(--s4); background: var(--card); box-shadow: var(--shadow);
+      transition: border-color .2s, transform .2s, background .2s;
     }
-    .card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
-    .cat { color: var(--accent-2); font-size: 11.5px; letter-spacing: 0.13em; text-transform: uppercase; }
-    .card h3 { font-size: 19px; margin: 12px 0 8px; letter-spacing: -0.01em; }
+    .card:hover { border-color: var(--border-strong); transform: translateY(-3px); background: var(--card-hover); }
+    .card-ico {
+      width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent-2); border: 1px solid var(--border);
+    }
+    .card-ico svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .card .cat { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: var(--s3); }
+    .card h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; margin: 6px 0 8px; }
     .card p { color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+    /* staggered reveal within the grid */
+    .grid .card:nth-child(2) { transition-delay: .06s; }
+    .grid .card:nth-child(3) { transition-delay: .12s; }
+    .grid .card:nth-child(4) { transition-delay: .18s; }
+    .grid .card:nth-child(5) { transition-delay: .24s; }
+    .grid .card:nth-child(6) { transition-delay: .30s; }
 
-    /* About */
-    .about p { color: var(--text-2); font-size: 16px; max-width: 66ch; }
-    .about p + p { margin-top: 16px; }
+    /* ---- About ---- */
+    .about h2 { font-size: clamp(23px, 3.6vw, 31px); font-weight: 600; letter-spacing: -0.02em; }
+    .about p { color: var(--text-2); font-size: 17px; max-width: 64ch; margin-top: var(--s3); }
     .about strong { color: var(--text); font-weight: 600; }
 
-    /* Contact */
-    .contact { text-align: center; padding: 64px 0 30px; }
-    .contact h2 { margin-bottom: 12px; }
-    .contact p { color: var(--text-2); max-width: 48ch; margin: 0 auto 26px; }
-    .contact .email { color: var(--accent-2); text-decoration: none; }
-    .contact .email:hover { text-decoration: underline; }
+    /* ---- Contact ---- */
+    .contact { text-align: center; padding-block: var(--s7); }
+    .contact h2 { font-size: clamp(26px, 4.4vw, 38px); font-weight: 600; letter-spacing: -0.025em; }
+    .contact p { color: var(--text-2); max-width: 46ch; margin: var(--s2) auto var(--s4); }
+    .contact .mail { font-family: var(--f-mono); font-size: 15px; }
 
-    footer { border-top: 1px solid var(--border); padding: 26px 0 40px; }
-    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
-    .foot a { color: var(--muted); text-decoration: none; }
+    footer { border-top: 1px solid var(--border); padding-block: var(--s4) var(--s6); }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--s1); color: var(--muted); font-size: 13px; font-family: var(--f-mono); }
+    .foot a { color: var(--muted); text-decoration: none; transition: color .16s; }
     .foot a:hover { color: var(--text-2); }
-
-    .divider { height: 1px; background: var(--border); margin: 8px 0; }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap bar">
-      <div class="wordmark">
-        <span class="mark">F</span>
-        <span>FIELD&nbsp;WRIGHT</span>
-      </div>
-      <nav class="nav">
-        <a href="#work" class="hide-sm">Work</a>
-        <a href="#about" class="hide-sm">About</a>
-        <a href="#contact">Contact</a>
+      <a class="brand" href="#top" aria-label="Field Wright home">
+        <span class="mark" aria-hidden="true">F</span>
+        <b>FIELD&nbsp;WRIGHT</b>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="link" href="#work">Apps</a>
+        <a class="link" href="#about">About</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a class="btn btn-ghost" href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <!-- Hero -->
     <div class="hero">
       <div class="wrap">
-        <div class="kicker mono">Built to solve my own problems</div>
-        <h1>I build apps to fix problems I run into — and share them.</h1>
-        <p>
+        <p class="eyebrow reveal">Built to solve my own problems</p>
+        <h1 class="reveal">I build apps to fix problems I run into — and share them.</h1>
+        <p class="lede reveal">
           I'm Hunter Easterling. Field Wright is where I put the apps I've built to solve
           real problems in my own work — across telecom, utilities, property, and oilfield.
           They're free to use, and if one of them helps you too, that's the whole point.
         </p>
-        <div class="cta-row">
+        <div class="cta-row reveal">
           <a class="btn btn-primary" href="#work">See the apps</a>
           <a class="btn btn-ghost" href="#contact">Say hello</a>
         </div>
@@ -160,57 +258,63 @@
 
     <!-- Approach -->
     <section class="wrap">
-      <div class="label mono">// <b>APPROACH</b></div>
+      <p class="label reveal">// how these get made</p>
       <div class="approach">
-        <div class="pt">
-          <div class="n mono">01</div>
-          <h3>A real problem first</h3>
-          <p>Every app here started with something that got in my way on an actual job — not a market I went looking for.</p>
+        <div class="pt reveal">
+          <div class="n">A real problem first</div>
+          <h3>Started on the job</h3>
+          <p>Every app here began with something that got in my way on an actual job — not a market I went looking for.</p>
         </div>
-        <div class="pt">
-          <div class="n mono">02</div>
-          <h3>Built to actually use</h3>
+        <div class="pt reveal">
+          <div class="n">Built to actually use</div>
+          <h3>Holds up in the field</h3>
           <p>Fast, legible, and dependable on a phone in the field — because I rely on them myself.</p>
         </div>
-        <div class="pt">
-          <div class="n mono">03</div>
-          <h3>Shared, not sold</h3>
-          <p>These are free to use. If something I made saves you time, take it and run.</p>
+        <div class="pt reveal">
+          <div class="n">Shared, not sold</div>
+          <h3>Yours to use</h3>
+          <p>These are free. If something I made saves you time, take it and run.</p>
         </div>
       </div>
     </section>
 
-    <!-- Work -->
+    <!-- Apps -->
     <section class="wrap" id="work">
-      <div class="label mono">// <b>THE APPS</b></div>
+      <p class="label reveal">// the apps</p>
       <div class="grid">
-        <div class="card">
-          <div class="cat mono">Telecom · Fiber</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="5.5" r="2.5"/><path d="M7.3 16.7 16.7 7.3"/><path d="M5.5 16V9M18.5 8v7"/></svg></div>
+          <p class="cat">Telecom · Fiber</p>
           <h3>Fiber Splicer Planner</h3>
           <p>Plan and track fiber splices — enclosures, trays, buffer and ribbon assignments, and splice diagrams for OSP crews.</p>
         </div>
-        <div class="card">
-          <div class="cat mono">Real estate</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M5 21V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16"/><path d="M3 21h18"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg></div>
+          <p class="cat">Real estate</p>
           <h3>Property Management</h3>
           <p>Rentals, units, tenants, leases, and maintenance requests organized in one place.</p>
         </div>
-        <div class="card">
-          <div class="cat mono">Telecom · Inventory</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><rect x="3" y="8.5" width="8" height="7.5" rx="1"/><rect x="13" y="4" width="8" height="7.5" rx="1"/><rect x="13" y="13.5" width="8" height="6.5" rx="1"/></svg></div>
+          <p class="cat">Telecom · Inventory</p>
           <h3>Telecom Construction Material Inventory</h3>
           <p>Track cable, hardware, and materials across telecom construction jobs and yards.</p>
         </div>
-        <div class="card">
-          <div class="cat mono">Utility · Maps</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.4 6H14a4 4 0 0 1 0 8h-4a4 4 0 0 0 0 8"/></svg></div>
+          <p class="cat">Utility · Maps</p>
           <h3>Re Route</h3>
           <p>Opens Apple Maps links in Google Maps automatically — no copy and paste.</p>
         </div>
-        <div class="card">
-          <div class="cat mono">Oilfield</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></div>
+          <p class="cat">Oilfield</p>
           <h3>Rig Check</h3>
           <p>Digital equipment inspections and safety checklists for drilling rigs.</p>
         </div>
-        <div class="card">
-          <div class="cat mono">In progress</div>
+        <div class="card reveal">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+          <p class="cat">In progress</p>
           <h3>More on the way</h3>
           <p>Whenever I hit a problem worth solving, another app usually follows. More coming.</p>
         </div>
@@ -218,26 +322,24 @@
     </section>
 
     <!-- About -->
-    <section class="wrap about" id="about">
-      <div class="label mono">// <b>ABOUT</b></div>
-      <h2>Not a company — just someone who builds.</h2>
-      <p style="margin-top:16px;">
+    <section class="wrap about">
+      <p class="label reveal">// about</p>
+      <h2 class="reveal">Not a company — just someone who builds.</h2>
+      <p class="reveal">
         <strong>Field Wright</strong> isn't a software firm. It's one person who keeps running into
         problems at work — across telecom, utilities, property, and oilfield — and builds small apps
         to fix them. This is just where I collect those projects and put them somewhere anyone can find.
       </p>
-      <p>
+      <p class="reveal">
         There's no pitch here. If something I made is useful to you, it's yours to use. That's it.
       </p>
     </section>
 
     <!-- Contact -->
-    <section class="contact wrap" id="contact">
-      <div class="divider"></div>
-      <div style="height:34px;"></div>
-      <h2>Say hello.</h2>
-      <p>Found a bug, have an idea, or built something similar? I'd genuinely like to hear from you.</p>
-      <a class="btn btn-primary" href="mailto:contact@fieldwright.dev">contact@fieldwright.dev</a>
+    <section class="wrap contact" id="contact">
+      <h2 class="reveal">Say hello.</h2>
+      <p class="reveal">Found a bug, have an idea, or built something similar? I'd genuinely like to hear from you.</p>
+      <a class="btn btn-primary mail reveal" href="mailto:contact@fieldwright.dev">contact@fieldwright.dev</a>
     </section>
   </main>
 
@@ -247,5 +349,39 @@
       <span>Built by Hunter Easterling · <a href="mailto:contact@fieldwright.dev">contact@fieldwright.dev</a></span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      // Theme: stored choice wins; otherwise follow the OS preference.
+      try {
+        var saved = localStorage.getItem("fw-theme");
+        if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+      } catch (e) {}
+      var toggle = document.getElementById("themeToggle");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          var isLight = getComputedStyle(root).getPropertyValue("--on-accent").trim().toLowerCase() === "#ffffff";
+          var next = isLight ? "dark" : "light";
+          root.setAttribute("data-theme", next);
+          try { localStorage.setItem("fw-theme", next); } catch (e) {}
+        });
+      }
+
+      // Reveal on scroll
+      var els = document.querySelectorAll(".reveal");
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || !("IntersectionObserver" in window)) {
+        els.forEach(function (el) { el.classList.add("is-in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
