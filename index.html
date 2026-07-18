@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Field Wright — Apps I built to solve real problems</title>
-  <meta name="description" content="Field Wright is where Hunter Easterling shares the apps he builds to solve problems he runs into — telecom, utilities, property, and oilfield. Free to use, no accounts, no tracking." />
+  <meta name="description" content="Field Wright is where Hunter Easterling shares the apps he builds to solve problems he runs into — telecom, fiber, property, and trucking. Field-tested, offline-first, no ads." />
   <link rel="canonical" href="https://fieldwright.dev/" />
   <meta name="theme-color" content="#0A0E0C" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#FBFDFB" media="(prefers-color-scheme: light)" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Field Wright — Apps I built to solve real problems" />
-  <meta property="og:description" content="I build small apps to fix problems I run into on the job, and share them in case they help you too. Free, no accounts, no tracking." />
+  <meta property="og:description" content="I build small apps to fix problems I run into on the job, and share them in case they help you too. Telecom, fiber, property, trucking — field-tested." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fieldwright.dev/" />
   <meta property="og:image" content="https://fieldwright.dev/og-image.png" />
@@ -19,7 +19,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Field Wright — Apps I built to solve real problems" />
-  <meta name="twitter:description" content="Small apps that fix real problems on the job — telecom, utilities, property, oilfield. Free to use." />
+  <meta name="twitter:description" content="Small apps that fix real problems on the job — telecom, fiber, property, trucking. Field-tested, offline-first." />
   <meta name="twitter:image" content="https://fieldwright.dev/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,7 +36,7 @@
     "email": "contact@fieldwright.dev",
     "jobTitle": "Independent app developer",
     "brand": { "@type": "Brand", "name": "Field Wright" },
-    "knowsAbout": ["Telecom", "Fiber optics", "Utilities", "Property management", "Oilfield"]
+    "knowsAbout": ["Telecom", "Fiber optics", "Utilities", "Property management", "Trucking", "Construction"]
   }
   </script>
 
@@ -319,6 +319,7 @@
     .grid .card:nth-child(4) { transition-delay: .15s; }
     .grid .card:nth-child(5) { transition-delay: .20s; }
     .grid .card:nth-child(6) { transition-delay: .25s; }
+    .grid .card:nth-child(7) { transition-delay: .30s; }
 
     /* ---- Principles band ---- */
     .band { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
@@ -388,8 +389,8 @@
         <h1 class="reveal">Apps I built to fix problems I hit on the job — <span class="grad">and share.</span></h1>
         <p class="lede reveal">
           I'm Hunter Easterling. Field Wright is where I put the apps I've built to solve
-          real problems in my own work — across telecom, utilities, property, and oilfield.
-          They're free to use, and if one of them helps you too, that's the whole point.
+          real problems in my own work — across telecom, utilities, property, and trucking.
+          If one of them helps you too, that's the whole point.
         </p>
         <div class="cta-row reveal">
           <a class="btn btn-primary" href="#work">
@@ -399,10 +400,10 @@
           <a class="btn btn-ghost" href="#contact">Say hello</a>
         </div>
         <div class="chips reveal" aria-label="What to expect">
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free to use</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No accounts</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No tracking</span>
           <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Field-tested</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Built solo</span>
         </div>
       </div>
     </div>
@@ -416,7 +417,7 @@
           <button class="filter" type="button" data-filter="telecom" aria-pressed="false">Telecom</button>
           <button class="filter" type="button" data-filter="utility" aria-pressed="false">Utility</button>
           <button class="filter" type="button" data-filter="property" aria-pressed="false">Property</button>
-          <button class="filter" type="button" data-filter="oilfield" aria-pressed="false">Oilfield</button>
+          <button class="filter" type="button" data-filter="trucking" aria-pressed="false">Trucking</button>
         </div>
       </div>
       <div class="grid" id="appGrid">
@@ -426,19 +427,19 @@
             <span class="card-idx">01</span>
           </div>
           <p class="cat">Telecom · Fiber</p>
-          <h3>Fiber Splicer Planner</h3>
-          <p>Plan and track fiber splices — enclosures, trays, buffer and ribbon assignments, and splice diagrams for OSP crews.</p>
-          <div class="card-meta"><span class="tag free"><span class="dot"></span>Free</span><span class="tag">Mobile</span></div>
+          <h3>Fiber Color Code</h3>
+          <p>Plan and share fiber splices with live color-coded splice plans — teams, jobs, GPS time-tracking, and PDF/CSV export.</p>
+          <div class="card-meta"><span class="tag">iOS · Android · Web</span><span class="tag">Teams</span></div>
         </div>
         <div class="card reveal" data-cat="property">
           <div class="card-top">
             <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M5 21V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16"/><path d="M3 21h18"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg></div>
             <span class="card-idx">02</span>
           </div>
-          <p class="cat">Real estate</p>
-          <h3>Property Management</h3>
-          <p>Rentals, units, tenants, leases, and maintenance requests organized in one place.</p>
-          <div class="card-meta"><span class="tag free"><span class="dot"></span>Free</span><span class="tag">Mobile</span></div>
+          <p class="cat">Property</p>
+          <h3>Linden</h3>
+          <p>Solo-landlord property management — rentals, units, tenants, leases, and maintenance requests in one place.</p>
+          <div class="card-meta"><span class="tag">iOS · Android</span></div>
         </div>
         <div class="card reveal" data-cat="telecom">
           <div class="card-top">
@@ -446,9 +447,9 @@
             <span class="card-idx">03</span>
           </div>
           <p class="cat">Telecom · Inventory</p>
-          <h3>Telecom Construction Material Inventory</h3>
-          <p>Track cable, hardware, and materials across telecom construction jobs and yards.</p>
-          <div class="card-meta"><span class="tag free"><span class="dot"></span>Free</span><span class="tag">Mobile</span></div>
+          <h3>Material Inventory</h3>
+          <p>Self-hosted barcode inventory for telecom construction — kiosk checkout for field crews, per-job material accounting, and printable closeout reports.</p>
+          <div class="card-meta"><span class="tag">Web · PWA</span><span class="tag">Self-hosted</span></div>
         </div>
         <div class="card reveal" data-cat="utility">
           <div class="card-top">
@@ -457,23 +458,33 @@
           </div>
           <p class="cat">Utility · Maps</p>
           <h3>Re Route</h3>
-          <p>Opens Apple Maps links in Google Maps automatically — no copy and paste.</p>
-          <div class="card-meta"><span class="tag free"><span class="dot"></span>Free</span><span class="tag">Android</span></div>
+          <p>Opens Apple Maps links in Google Maps automatically — paste, share, or tap a link and it hands off instantly.</p>
+          <div class="card-meta"><span class="tag">Android</span></div>
         </div>
-        <div class="card reveal" data-cat="oilfield">
+        <div class="card reveal" data-cat="trucking">
           <div class="card-top">
             <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></div>
             <span class="card-idx">05</span>
           </div>
-          <p class="cat">Oilfield</p>
+          <p class="cat">Trucking · DVIR</p>
           <h3>Rig Check</h3>
-          <p>Digital equipment inspections and safety checklists for drilling rigs.</p>
-          <div class="card-meta"><span class="tag free"><span class="dot"></span>Free</span><span class="tag">Mobile</span></div>
+          <p>Daily driver's vehicle inspection reports for truckers — fast pre/post-trip checks, local history, and compliant PDF export. No account, works offline.</p>
+          <div class="card-meta"><span class="tag">iOS · Android</span><span class="tag">FMCSA DVIR</span></div>
+        </div>
+        <div class="card reveal" data-cat="utility">
+          <div class="card-top">
+            <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1V5a1 1 0 0 1 1-1z"/><path d="m9 13 1.6 1.6L14 11"/></svg></div>
+            <span class="card-idx">06</span>
+          </div>
+          <p class="cat">Utility · Fiber</p>
+          <h3>StakeTrak</h3>
+          <p>Unit tracking and billing for fiber and utility contractors — import staking sheets, complete units offline in the field, approve in the office, and roll up per-work-order invoices.</p>
+          <div class="card-meta"><span class="tag">Web</span><span class="tag">Offline-first</span></div>
         </div>
         <div class="card reveal" data-cat="upcoming">
           <div class="card-top">
             <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
-            <span class="card-idx">06</span>
+            <span class="card-idx">07</span>
           </div>
           <p class="cat">In progress</p>
           <h3>More on the way</h3>
@@ -501,7 +512,7 @@
         <div class="pt reveal">
           <div class="n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>Shared, not sold</div>
           <h3>Yours to use</h3>
-          <p>These are free. If something I made saves you time, take it and run.</p>
+          <p>Most are free, and none are built to trap you. If something I made saves you time, take it and run.</p>
         </div>
       </div>
     </section>
@@ -512,24 +523,24 @@
       <p class="label reveal" id="principles-title">// what you can count on</p>
       <div class="principles">
         <div class="pr reveal">
-          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/></svg></div>
-          <h3>Free, no catch</h3>
-          <p>No paywalls, no trials, no upsell. If it's here, it's free to use.</p>
+          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M5 12.5a7 7 0 0 1 13-3.5M19 11.5a7 7 0 0 1-13 3.5"/><path d="M18 5v4h-4M6 19v-4h4"/></svg></div>
+          <h3>Works offline</h3>
+          <p>Built offline-first, because a signal in the field is never a given.</p>
         </div>
         <div class="pr reveal">
-          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M12 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><rect x="4" y="9" width="16" height="12" rx="2"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/></svg></div>
-          <h3>No accounts</h3>
-          <p>Open it and go. Nothing to sign up for, nothing to remember.</p>
+          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M4.9 4.9A9 9 0 0 0 12 21a9 9 0 0 0 7.1-16.1z"/><path d="M3 3l18 18"/></svg></div>
+          <h3>No ads, no dark patterns</h3>
+          <p>No ads and no selling your data. The app is the product, not you.</p>
         </div>
         <div class="pr reveal">
-          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M9.9 4.2A9 9 0 0 1 21 12M3 12a9 9 0 0 0 9 9"/><path d="M3 3l18 18"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <h3>No tracking</h3>
-          <p>No analytics dragnet and no ads. Your data stays yours.</p>
-        </div>
-        <div class="pr reveal">
-          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
+          <div class="pr-ico"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <h3>Field-tested</h3>
           <p>Every app earns its place by holding up on a real job first.</p>
+        </div>
+        <div class="pr reveal">
+          <div class="pr-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+          <h3>Built solo</h3>
+          <p>Made and supported by one person — email goes straight to me.</p>
         </div>
       </div>
     </div>
@@ -541,7 +552,7 @@
       <h2 class="reveal">Not a company — just someone who builds.</h2>
       <p class="reveal">
         <strong>Field Wright</strong> isn't a software firm. It's one person who keeps running into
-        problems at work — across telecom, utilities, property, and oilfield — and builds small apps
+        problems at work — across telecom, utilities, property, and trucking — and builds small apps
         to fix them. This is just where I collect those projects and put them somewhere anyone can find.
       </p>
       <p class="reveal">
